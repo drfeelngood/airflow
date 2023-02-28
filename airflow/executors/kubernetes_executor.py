@@ -147,6 +147,7 @@ class KubernetesJobWatcher(multiprocessing.Process, LoggingMixin):
                 watcher.stream, kube_client.list_namespaced_pod, self.namespace, **kwargs
             )
         for event in list_worker_pods():
+            print(event)
             task = event["object"]
             self.log.debug("Event: %s had an event of type %s", task.metadata.name, event["type"])
             if event["type"] == "ERROR":
